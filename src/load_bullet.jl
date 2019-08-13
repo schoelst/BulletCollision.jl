@@ -7,8 +7,9 @@ for p in bullet_include_paths
 end
 
 # add *.so files from /usr/local/lib 
-include_files = ["libBulletCollision.so","libLinearMath.so","libBulletDynamics.so"];
-so_hdr = "/usr/lib/x86_64-linux-gnu"
+f_ext = Sys.islinux() ? "so" : "dylib"
+include_files = ["libBulletCollision."*f_ext,"libLinearMath."*f_ext,"libBulletDynamics."*f_ext];
+so_hdr = "/usr/local/lib"
 for fn in include_files
   Libdl.dlopen(joinpath(so_hdr,fn), Libdl.RTLD_GLOBAL);
 end
